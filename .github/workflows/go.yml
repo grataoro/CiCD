@@ -13,6 +13,14 @@ jobs:
 
   test:
     runs-on: ${{ matrix.os-version }}
+
+    env:
+      HOST: localhost 
+      PORT: 5432
+      USER: root 
+      PASSWORD: root 
+      DBNAME: root
+
     strategy:
       matrix:
         go-version: ['1.17','>=1.18']
@@ -38,7 +46,11 @@ jobs:
 
   build: 
     needs: test                                                         
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os-version }}
+    strategy:
+      matrix:
+        os-version: ['ubuntu-latest','ubuntu-18.04']
+
     steps:
     - uses: actions/checkout@v3                                                 
 
