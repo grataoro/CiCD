@@ -5,17 +5,18 @@ name: Go
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [ "main" ]  # para executar em qualuqer branche mde o "main" por "*"
   pull_request:
     branches: [ "main" ]
 
 jobs:
 
   test:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.os-version }}
     strategy:
       matrix:
         go-version: ['1.17','>=1.18']
+        os-version: ['ubuntu-latest','ubuntu-18.04']
 
     steps:
     - uses: actions/checkout@v3
